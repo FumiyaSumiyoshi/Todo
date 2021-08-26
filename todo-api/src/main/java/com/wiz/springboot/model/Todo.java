@@ -1,6 +1,5 @@
 package com.wiz.springboot.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -10,9 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "list")
-public class Todo implements Serializable {
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+public class Todo {
 
 	/**
 	 * IDの定義
@@ -80,7 +82,7 @@ public class Todo implements Serializable {
 
 	}
 
-	public void setQuestionContent(String toDo) {
+	public void setToDo(String toDo) {
 
 		this.toDo = toDo;
 

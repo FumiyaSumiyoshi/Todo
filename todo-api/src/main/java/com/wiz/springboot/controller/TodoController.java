@@ -42,7 +42,7 @@ public class TodoController {
 	 * @param todoList
 	 * @return
 	 */
-	@RequestMapping(value = "/todo", method = RequestMethod.POST)
+	@RequestMapping(value = "/todo/create", method = RequestMethod.POST)
 	public List<Todo> Post(@RequestBody List<Todo> todoList) {
 
 		// 新しいデータの保存
@@ -58,7 +58,7 @@ public class TodoController {
 	 * @param todo
 	 * @return
 	 */
-	@RequestMapping(value = "/todo", method = RequestMethod.PUT)
+	@RequestMapping(value = "/todo/edit", method = RequestMethod.PUT)
 	public Todo Put(@RequestBody Todo todo) {
 
 		// 指定されたIDのレコードを取得
@@ -86,15 +86,15 @@ public class TodoController {
 	 * @param todo
 	 * @return
 	 */
-	@RequestMapping(value = "/todo", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/todo/delete", method = RequestMethod.DELETE)
 	public Todo Delete(@RequestBody Todo todo) {
+
 		// 指定されたIDのレコードを取得
 		Optional<Todo> target = todoRepository.findById(todo.getId());
 
 		if (target.isEmpty()) {
 
 			// 指定されたIDが見つからない場合は何もせず終了
-
 			return null;
 
 		} else {
