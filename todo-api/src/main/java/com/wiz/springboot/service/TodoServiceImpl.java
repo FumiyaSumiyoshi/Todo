@@ -1,5 +1,8 @@
 package com.wiz.springboot.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
@@ -23,6 +26,17 @@ public class TodoServiceImpl implements TodoService {
 	private TodoRepository todoRepository;
 
 	/**
+	 * ToDoリストの取得
+	 * @return
+	 */
+	@Override
+	public List<Todo> findAll() {
+
+		return todoRepository.findAll();
+
+	}
+
+	/**
 	 * ToDoリストの作成
 	 *
 	 * @param todoForm フォーム
@@ -30,10 +44,14 @@ public class TodoServiceImpl implements TodoService {
 	 */
 	@Override
 	public Todo doInsert(TodoForm todoForm) {
+
 		Todo todo = new Todo();
+
 		// 同じプロパティ同士で内容をコピー
 		BeanUtils.copyProperties(todoForm, todo);
+
 		return todoRepository.save(todo);
+
 	}
 
 	/**
@@ -44,25 +62,27 @@ public class TodoServiceImpl implements TodoService {
 	 */
 	@Override
 	public Todo editTodo(TodoForm todoForm) {
+
 		Todo todo = new Todo();
 
 		if (todoForm == null) {
+
 			throw new NotFoundException("対象のレコードが見つかりません。");
+
 		}
 
 		BeanUtils.copyProperties(todoForm, todo);
 
 		return todoRepository.save(todo);
+
 	}
 
 	/**
 	 * idをキーにToDoリストを削除する 論理削除
-	 *
-	 * @param id id
-	 * @return
+	 * @param id
 	 */
 	@Override
-	public Todo deleteTodo(Long id) {
+	public void deleteById(Long id) {
 
 		if (id == null) {
 
@@ -77,7 +97,19 @@ public class TodoServiceImpl implements TodoService {
 
 		}
 
-		return todoRepository.save(todo);
+		todoRepository.deleteById(id);
+
+	}
+
+	/**
+	 * idをキーにレコードを取得する
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Optional<Todo> findById(Long id) {
+
+		return todoRepository.findById(id);
 
 	}
 

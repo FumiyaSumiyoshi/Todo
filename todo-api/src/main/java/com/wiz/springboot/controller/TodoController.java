@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wiz.springboot.model.Todo;
@@ -17,7 +15,7 @@ import com.wiz.springboot.repositoly.TodoRepository;
  */
 @RestController
 public class TodoController {
-
+	
 	@Autowired
 	TodoRepository todoRepository;
 
@@ -26,7 +24,7 @@ public class TodoController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/todo", method = RequestMethod.GET)
+//	@RequestMapping(value = "/todo", method = RequestMethod.GET)
 	public List<Todo> Get() {
 
 		// 全件取得
@@ -42,7 +40,7 @@ public class TodoController {
 	 * @param todoList
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/create", method = RequestMethod.POST)
+//	@RequestMapping(value = "/todo/create", method = RequestMethod.POST)
 	public List<Todo> Post(@RequestBody List<Todo> todoList) {
 
 		// 新しいデータの保存
@@ -58,7 +56,7 @@ public class TodoController {
 	 * @param todo
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/edit", method = RequestMethod.PUT)
+//	@RequestMapping(value = "/todo/edit", method = RequestMethod.PUT)
 	public Todo Put(@RequestBody Todo todo) {
 
 		// 指定されたIDのレコードを取得
@@ -86,7 +84,7 @@ public class TodoController {
 	 * @param todo
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/delete", method = RequestMethod.DELETE)
+//	@RequestMapping(value = "/todo/delete", method = RequestMethod.DELETE)
 	public Todo Delete(@RequestBody Todo todo) {
 
 		// 指定されたIDのレコードを取得

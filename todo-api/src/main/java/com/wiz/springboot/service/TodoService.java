@@ -1,10 +1,19 @@
 package com.wiz.springboot.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.wiz.springboot.form.TodoForm;
 import com.wiz.springboot.model.Todo;
 
 public interface TodoService {
-
+	
+	/**
+	 * ToDoリストの取得
+	 * @return
+	 */
+	public List<Todo> findAll();
+	
 	/**
 	 * ToDoリストの作成
 	 * @param todoForm フォーム
@@ -24,6 +33,13 @@ public interface TodoService {
 	 * @param id id
 	 * @return
 	 */
-	public Todo deleteTodo(Long id);
+	public void deleteById(Long id);
+	
+	/**
+	 * idをキーにレコードを取得する
+	 * @param id
+	 * @return
+	 */
+	public Optional<Todo> findById(Long id);
 
 }

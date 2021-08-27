@@ -72,7 +72,7 @@ public class Todo {
 	}
 
 	/**
-	 * やることのsetter,getter
+	 * やることを返す
 	 * 
 	 * @return
 	 */
@@ -82,6 +82,11 @@ public class Todo {
 
 	}
 
+	/**
+	 * やることを設定する
+	 * 
+	 * @param toDo
+	 */
 	public void setToDo(String toDo) {
 
 		this.toDo = toDo;
@@ -89,7 +94,7 @@ public class Todo {
 	}
 
 	/**
-	 * 更新日時のsetter,getter
+	 * 更新日時を返す
 	 * 
 	 * @return
 	 */
@@ -99,6 +104,11 @@ public class Todo {
 
 	}
 
+	/**
+	 * 更新日時の設定
+	 * 
+	 * @param editTime
+	 */
 	public void setEditTime(LocalDateTime editTime) {
 
 		this.editTime = editTime;
@@ -106,7 +116,7 @@ public class Todo {
 	}
 
 	/**
-	 * 期限のsetter,getter
+	 * 期限を返す
 	 * 
 	 * @return
 	 */
@@ -116,6 +126,11 @@ public class Todo {
 
 	}
 
+	/**
+	 * 期限の設定
+	 * 
+	 * @param timeLimit
+	 */
 	public void setTimeLimit(LocalDateTime timeLimit) {
 
 		this.timeLimit = timeLimit;
@@ -123,7 +138,7 @@ public class Todo {
 	}
 
 	/**
-	 * 到達度のsetter,getter
+	 * 到達度を返す
 	 * 
 	 * @return
 	 */
@@ -133,6 +148,11 @@ public class Todo {
 
 	}
 
+	/**
+	 * 到達度の設定
+	 * 
+	 * @param missionComp
+	 */
 	public void setMissionComp(String missionComp) {
 
 		this.missionComp = missionComp;
@@ -140,7 +160,7 @@ public class Todo {
 	}
 
 	/**
-	 * 備考のsetter,getter
+	 * 備考を返す
 	 * 
 	 * @return
 	 */
@@ -150,6 +170,11 @@ public class Todo {
 
 	}
 
+	/**
+	 * 備考の設定
+	 * 
+	 * @param addNote
+	 */
 	public void setAddNote(String addNote) {
 
 		this.addNote = addNote;

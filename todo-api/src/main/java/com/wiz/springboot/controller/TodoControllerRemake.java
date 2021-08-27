@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.wiz.springboot.TodoJsonResponse.TodoJsonResponse;
 import com.wiz.springboot.form.TodoForm;
 import com.wiz.springboot.model.Todo;
 import com.wiz.springboot.repositoly.TodoRepository;
 import com.wiz.springboot.service.TodoService;
+import com.wiz.springboot.todoJsonResponse.TodoJsonResponse;
 
 /**
  * ToDoリストRESTコントローラークラス
@@ -40,11 +40,11 @@ public class TodoControllerRemake {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/GET/new", method = RequestMethod.GET)
-	public List<Todo> Get() {
+	@RequestMapping(value = "/todo", method = RequestMethod.GET)
+	public List<Todo> read() {
 
 		// 全件取得
-		List<Todo> list = todoRepository.findAll();
+		List<Todo> list = todoService.findAll();
 
 		return list;
 
@@ -57,9 +57,9 @@ public class TodoControllerRemake {
 	 * @param errorResult
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/POST/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/todo/create", method = RequestMethod.POST)
 	@ResponseBody
-	public TodoJsonResponse store(@Validated @RequestBody TodoForm todoForm, BindingResult errorResult) {
+	public TodoJsonResponse create(@Validated @RequestBody TodoForm todoForm, BindingResult errorResult) {
 
 		TodoJsonResponse todoJsonResponse = new TodoJsonResponse();
 		todoJsonResponse.setToDo(todoForm.getToDo());
@@ -109,7 +109,7 @@ public class TodoControllerRemake {
 	 * @param errorResult
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/PUT/{id}/new", method = RequestMethod.PUT)
+	@RequestMapping(value = "/todo/{id}/edit", method = RequestMethod.PUT)
 	@ResponseBody
 	public TodoJsonResponse edit(@PathVariable Long id, @Validated @RequestBody TodoForm todoForm,
 			BindingResult errorResult) {
@@ -162,26 +162,27 @@ public class TodoControllerRemake {
 	 * @param attributes
 	 * @return
 	 */
-	@RequestMapping(value = "/todo/DELETE/{id}/new", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/todo/{id}/delete", method = RequestMethod.DELETE)
 	public TodoJsonResponse delete(@PathVariable Long id, RedirectAttributes attributes) {
 
 		// 指定されたIDのレコードを取得
-		Optional<Todo> target = todoRepository.findById(id);
+		Optional<Todo> target = todoService.findById(id);
+//		Optional<Todo> target = todoService.findById(id);
 
 		TodoJsonResponse todoJsonResponse = new TodoJsonResponse();
 
 		if (target.isEmpty()) {
-
-			throw new RuntimeException("削除に失敗しました。");
-
+			
 			// 指定されたIDが見つからない場合は何もせず終了
+			todoJsonResponse.setMessage("削除に失敗しました。");
+
 		} else {
 
 			todoJsonResponse.setSuccess(true);
 			todoJsonResponse.setMessage("削除しました。");
 
 			//指定されたIDのデータを削除
-			todoRepository.deleteById(target.get().getId());
+			todoService.deleteById(target.get().getId());
 
 		}
 
